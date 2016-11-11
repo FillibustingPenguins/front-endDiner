@@ -3,6 +3,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Crud extends Application {
+    
+        function __construct() {
+            parent::__construct();
+            $this->load->helper('formfields');
+	}
 
 	public function index() {
             $userrole = $this->session->userdata('userrole');
@@ -17,7 +22,7 @@ class Crud extends Application {
         }
         
         function edit($id=null) {
-            $this->load->helper('formfields');
+            
             
             // try the session first
             $key = $this->session->userdata('key');
