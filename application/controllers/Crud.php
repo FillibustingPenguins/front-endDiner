@@ -35,6 +35,8 @@ class Crud extends Application {
                 $this->session->set_userdata('record',$record);
             }
             
+            $this->data['action'] = (empty($key)) ? 'Adding' : 'Editing';
+            
             // build the form fields
             $this->data['fid'] = makeTextField('Menu code', 'id', $record->id);
             $this->data['fname'] = makeTextField('Item name', 'name', $record->name);
@@ -157,5 +159,13 @@ class Crud extends Application {
                 $this->menu->delete($key);
             }
             $this->index();
+        }
+        
+        function add() {
+            $key = NULL;
+            $record = $this->menu->create();
+            $this->session->set_userdata('key', $key);
+            $this->session->set_userdata('record', $record);
+            $this->edit();
         }
 }
