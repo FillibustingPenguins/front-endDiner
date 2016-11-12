@@ -12,5 +12,6 @@
     </div>
     {fcategory}
     {zsubmit} <a class="btn btn-default" role="button" href="/crud/cancel">Cancel</a>
+    <a class="btn btn-default" role="button" href="/crud/delete">Delete</a>
 </form>
 

@@ -148,4 +148,14 @@ class Crud extends Application {
             } else
                 return $this->upload->data('file_name');          
         }
+        
+        function delete() {
+            $key = $this->session->userdata('key');
+            $record = $this->session->userdata('record');
+            // only delete if editing an existing record
+            if (! empty($record)) {
+                $this->menu->delete($key);
+            }
+            $this->index();
+        }
 }
