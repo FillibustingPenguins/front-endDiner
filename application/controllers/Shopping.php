@@ -22,8 +22,6 @@ class Shopping extends Application
     }
 
     public function keep_shopping() {
-        $stuff = file_get_contents('../data/receipt.md');
-        $this->data['receipt'] = $this->parsedown->parse($stuff);
         $this->data['content'] = '';
 
         // pictorial menu
@@ -37,7 +35,12 @@ class Shopping extends Application
                 }
                 $count++;
         }
-        $this->render('template-shopping'); 
+        
+        $order = new Order($this->session->userdata('order'));
+        $stuff = $order->receipt();
+        $this->data['receipt'] = $this->parsedown->parse($stuff);
+        
+        $this->render('template-shopping');
     }
     
     public function neworder() {
@@ -62,7 +65,7 @@ class Shopping extends Application
     public function add($what) {
         $order = new Order($this->session->userdata('order'));
         $order->additem($what);
-        $this->keep_shopping();
         $this->session->set_userdata('order',(array)$order);
+        $this->keep_shopping();
     }
 }
