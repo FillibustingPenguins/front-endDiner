@@ -7,3 +7,4 @@
 !*/cache/.htaccess
 /nbproject/private/
 /nbproject/
+*/data/*.xml
