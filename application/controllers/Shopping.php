@@ -66,6 +66,6 @@ class Shopping extends Application
         $order = new Order($this->session->userdata('order'));
         $order->additem($what);
         $this->session->set_userdata('order',(array)$order);
-        $this->keep_shopping();
+        redirect('/shopping');
     }
 }
