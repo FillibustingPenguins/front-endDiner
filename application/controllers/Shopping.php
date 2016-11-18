@@ -68,4 +68,15 @@ class Shopping extends Application
         $this->session->set_userdata('order',(array)$order);
         redirect('/shopping');
     }
+    
+    public function checkout() {
+        $order = new Order($this->session->userdata('order'));
+        // ignore invalid requests
+        if (! $order->validate())
+            redirect('/shopping');
+
+        $order->save();
+        $this->session->unset_userdata('order');
+        redirect('/shopping');
+    }
 }
