@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `categories`
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` varchar(1) NOT NULL,
   `name` varchar(64) NOT NULL,
@@ -49,7 +49,7 @@ INSERT INTO `categories` (`id`, `name`, `description`, `image`) VALUES
 -- Table structure for table `ci_sessions`
 --
 
-DROP TABLE IF EXISTS `ci_sessions`
+DROP TABLE IF EXISTS `ci_sessions`;
 CREATE TABLE `ci_sessions` (
   `id` varchar(128) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
@@ -83,7 +83,7 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 -- Table structure for table `menu`
 --
 
-DROP TABLE IF EXISTS `menu`
+DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu` (
   `id` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
@@ -112,7 +112,7 @@ INSERT INTO `menu` (`id`, `name`, `description`, `price`, `picture`, `category`)
 -- Table structure for table `orderitems`
 --
 
-DROP TABLE IF EXISTS `orderitems`
+DROP TABLE IF EXISTS `orderitems`;
 CREATE TABLE `orderitems` (
   `order` int(11) NOT NULL,
   `item` int(11) NOT NULL,
@@ -125,7 +125,7 @@ CREATE TABLE `orderitems` (
 --
 -- Table structure for table `orders`
 --
-DROP TABLE IF EXISTS `orders`
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `num` int(11) NOT NULL,
   `date` datetime NOT NULL,
