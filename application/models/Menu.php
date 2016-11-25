@@ -18,6 +18,14 @@ class Menu extends CI_Model {
                
 	}
         
+        // Return all records as an array of objects
+        function all()
+        {
+            $this->rest->initialize(array('server' => REST_SERVER));
+            $this->rest->option(CURLOPT_PORT, REST_PORT);
+            return $this->rest->get('/maintenance');
+        }
+        
         
         function rules() {
             $config = [
