@@ -51,9 +51,35 @@ class Menu extends CI_Model {
         {
             $this->rest->initialize(array('server' => REST_SERVER));
             $this->rest->option(CURLOPT_PORT, REST_PORT);
-            print_r($this->rest->delete('/maintenance/item/id/' . $key));
-            die();
+            $this->rest->delete('maintenance/item/id/' . $key);
+            //print_r($this->rest->delete('/maintenance/item/id/' . $key));
+            //die();
         }
+        
+        // Determine if a key exists
+        function exists($key, $key2 = null)
+        {
+                $this->rest->initialize(array('server' => REST_SERVER));
+                $this->rest->option(CURLOPT_PORT, REST_PORT);
+                $result = $this->rest->get('/maintenance/item/id/' . $key);
+                return ! empty($result);
+        }
+        
+        // Update a record in the DB
+        function update($record)
+        {
+                $this->rest->initialize(array('server' => REST_SERVER));
+                $this->rest->option(CURLOPT_PORT, REST_PORT);
+                $retrieved = $this->rest->put('/maintenance/item/id/' . $record->id, $record);
+        }
+
+        // Add a record to the DB
+        function add($record)
+        {
+                $this->rest->initialize(array('server' => REST_SERVER));
+                $this->rest->option(CURLOPT_PORT, REST_PORT);
+                $retrieved = $this->rest->post('/maintenance/item/id/' . $record->id, $record);
+        }        
         
         function rules() {
             $config = [
