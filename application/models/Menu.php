@@ -11,9 +11,13 @@ class Menu extends CI_Model {
 	// constructor
 	function __construct()
 	{
-		parent::__construct();
+            parent::__construct();
+                
+            //*** Explicitly load the REST libraries. 
+            $this->load->library(['curl', 'format', 'rest']);
                
 	}
+        
         
         function rules() {
             $config = [
