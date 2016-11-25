@@ -1,12 +1,59 @@
 <?php
 
-class Menu extends MY_Model {
+/**
+ * Modified to use REST client to get port data from our server.
+ */
+define('REST_SERVER', 'http://backend.local');  // the REST server host
+define('REST_PORT', $_SERVER['SERVER_PORT']);   // the port you are running the server on
+
+class Menu extends CI_Model {
 
 	// constructor
 	function __construct()
 	{
-		parent::__construct();
+            parent::__construct();
+                
+            //*** Explicitly load the REST libraries. 
+            $this->load->library(['curl', 'format', 'rest']);
+               
 	}
+        
+        // Return all records as an array of objects
+        function all()
+        {
+            $this->rest->initialize(array('server' => REST_SERVER));
+            $this->rest->option(CURLOPT_PORT, REST_PORT);
+            return $this->rest->get('/maintenance');
+        }
+        
+        // Retrieve an existing DB record as an object
+        function get($key, $key2 = null)
+        {
+            $this->rest->initialize(array('server' => REST_SERVER));
+            $this->rest->option(CURLOPT_PORT, REST_PORT);
+            return $this->rest->get('/maintenance/item/id/' . $key);
+        }
+        
+        // Create a new data object.
+        // Only use this method if intending to create an empty record and then
+        // populate it.
+        function create()
+        {
+            $names = ['id','name','description','price','picture','category'];
+            $object = new StdClass;
+            foreach ($names as $name)
+                $object->$name = "";
+            return $object;
+        }
+        
+        // Delete a record from the DB
+        function delete($key, $key2 = null)
+        {
+            $this->rest->initialize(array('server' => REST_SERVER));
+            $this->rest->option(CURLOPT_PORT, REST_PORT);
+            print_r($this->rest->delete('/maintenance/item/id/' . $key));
+            die();
+        }
         
         function rules() {
             $config = [
