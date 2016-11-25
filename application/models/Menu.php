@@ -34,6 +34,18 @@ class Menu extends CI_Model {
             return $this->rest->get('/maintenance/item/id/' . $key);
         }
         
+        // Create a new data object.
+        // Only use this method if intending to create an empty record and then
+        // populate it.
+        function create()
+        {
+            $names = ['id','name','description','price','picture','category'];
+            $object = new StdClass;
+            foreach ($names as $name)
+                $object->$name = "";
+            return $object;
+        }
+        
         
         function rules() {
             $config = [
