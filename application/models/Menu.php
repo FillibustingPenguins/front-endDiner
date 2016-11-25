@@ -46,6 +46,14 @@ class Menu extends CI_Model {
             return $object;
         }
         
+        // Delete a record from the DB
+        function delete($key, $key2 = null)
+        {
+            $this->rest->initialize(array('server' => REST_SERVER));
+            $this->rest->option(CURLOPT_PORT, REST_PORT);
+            print_r($this->rest->delete('/maintenance/item/id/' . $key));
+            die();
+        }
         
         function rules() {
             $config = [
