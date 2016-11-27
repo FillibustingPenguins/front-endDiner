@@ -28,7 +28,7 @@ class Crud extends Application {
             $record = $this->session->userdata('record');
             
             // if not there, get them from the database
-            if (empty($record)) {
+            if (empty($record) && ($id !== null)) {
                 $record = $this->menu->get($id);
                 $key = $id;
                 $this->session->set_userdata('key',$id);
@@ -112,7 +112,9 @@ class Crud extends Application {
             else
                 $this->menu->update($record);
             // and redisplay the list
-            $this->index();
+            //$this->session->unset_userdata('record');
+            //$this->index();
+            $this->cancel();
         }
         
         function show_any_errors() {
@@ -157,8 +159,10 @@ class Crud extends Application {
             // only delete if editing an existing record
             if (! empty($record)) {
                 $this->menu->delete($key);
+                $this->session->unset_userdata('record');
             }
             $this->index();
+            //cancel();
         }
         
         function add() {
